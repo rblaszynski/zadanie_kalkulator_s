@@ -1,17 +1,26 @@
 package com.robert.calculator.controller;
 
+import com.robert.calculator.model.Countries;
+import com.robert.calculator.model.Rates;
+import com.robert.calculator.service.NBPservice;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @Controller
-@RequestMapping("/")
 public class HelloController {
 
-    @RequestMapping(method = RequestMethod.GET)
+
+    @RequestMapping(value = "/",method = RequestMethod.GET)
     public String getCalculatorPage()
     {
         return "Calculator";
     }
+
+
 }
