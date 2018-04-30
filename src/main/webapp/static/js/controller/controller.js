@@ -1,26 +1,36 @@
 'use strict';
 
-App.controller('NBPController', ['$scope', 'NBPservice', function($scope, NBPservice) {
+App.controller('Controller', ['$scope', 'Service', function($scope, Service) {
     var self = this;
-    self.salary={salary:0};
-    self.rate={rate:0};
 
-    $scope.codes= [
-        {name:'USD'},
-        {name:'EUR'}
-    ];
-    $scope.myCode = $scope.codes[0];
-
+    self.calcResult='Miesięczny zarobek netto: 0 PLN';
+    self.salary=0;
 
     self.showRate = function (code, salary) {
-        NBPservice.getRate(code, salary)
+        Service.getRate(code, salary)
             .then(
                 function (value) {
-                    self.rate=value;
+                    self.calcResult=value;
                 },
                 function (err) {
                     console.error('Error');
                 }
             );
     };
+
+    self.getCodes = function () {
+        Service.getCodes()
+            .then(
+                function (value) {
+                    $scope.codes=value;
+                    $scope.myCode=$scope.codes[0];
+                },
+                function (err) {
+                    console.error('Error');
+                }
+            );
+    };
+
+    self.getCodes();
 }]);
+

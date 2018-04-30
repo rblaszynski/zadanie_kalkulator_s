@@ -1,14 +1,12 @@
 package com.robert.calculator.configuration;
 
-import javax.servlet.Filter;
-
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class HelloInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { HelloConfiguration.class };
+        return new Class[]{AppConfiguration.class};
     }
 
     @Override
@@ -18,7 +16,7 @@ public class HelloInitializer extends AbstractAnnotationConfigDispatcherServletI
 
     @Override
     protected String[] getServletMappings() {
-        return new String[] { "/" };
+        return new String[]{"/"};
     }
 
 

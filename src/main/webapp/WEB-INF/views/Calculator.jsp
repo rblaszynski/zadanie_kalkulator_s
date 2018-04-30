@@ -9,35 +9,46 @@
 </head>
 <body ng-app="app" class="ng-cloak">
 <div class="py-5 text-center">
-    <h2>Salary calculator</h2>
-    <p class="lead">Enter your daily income and choose country to see how much money you will earn in month</p>
+    <h2>Kalkulator wynagrodzeń</h2>
+    <p class="lead">Wybierz kraj, wprowadź dzienne zarobki i sprawdź ile zarobisz</p>
+    <hr>
 </div>
-<div class="generic-container" ng-controller="NBPController as ctrl">
+
+<div class="generic-container" data-ng-controller="Controller as ctrl">
     <div class="container">
-        <form>
-         <div class="col-md-5 mb-3">
-             <label class="control-lable">Country</label>
-             <select ng-model="myCode" ng-options="code.name for code in codes" class="custom-select d-block w-100" id="country" required>
-                 <option value="">Choose...</option>
-             </select>
-         </div>
-        <div class="col-md-6 mb-3">
-            <label class="control-lable">Salary</label>
-            <input data-ng-model="ctrl.salary" data-ng-pattern="^[+-]?([0-9]*[.])?[0-9]+$" name="num" class="form-control" placeholder="Enter your daily income" required/>
-        </div>
-        <div class="col-md-7 mb-3">
-            <div class="form-actions floatRight">
-                <button type="button" ng-click="ctrl.showRate(myCode.name,ctrl.salary)" class="btn btn-primary btn-sm"
-                        ng-disabled="myForm.$invalid">CHECK</button>
+        <form name="form">
+            <div class="col-md-5 mb-3">
+                <label for="country">Kraj: </label><select data-ng-model="myCode"
+                                                           data-ng-options="code.name for code in codes"
+                                                           class="custom-select d-block w-100" id="country" required>
+                <option value="">Wybierz...</option>
+            </select>
             </div>
-        </div>
-        <div class="col-md-8 mb-3">
-        <pre>
-            <h2>Wynik: <span ng-bind="ctrl.rate"></span></h2>
-        </pre>
-        </div>
-    </form>
-</div>
+
+            <div class="col-md-5 mb-3">
+                <label class="control-lable">Dzienna stawka brutto: </label>
+                <div class="input-group">
+                    <input type="text" data-ng-model="ctrl.salary" id="input" name="input" pattern="^\d+(\.\d{1,2})?$"
+                           class="form-control" placeholder="Wpisz dzienną stawkę brutto" required/>
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2">{{myCode.code}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="form-actions floatRight">
+                    <button type="button" data-ng-click="ctrl.showRate(myCode.code,ctrl.salary)"
+                            class="btn btn-primary btn-sm" data-ng-disabled="form.$invalid"> SPRAWDŹ
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-7 mb-3">
+                <h4>{{ctrl.calcResult}}</h4>
+            </div>
+        </form>
+    </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="<c:url value='/static/js/app.js' />"></script>

@@ -2,10 +2,10 @@ package com.robert.calculator.model;
 
 import java.math.BigDecimal;
 
-public class Rates {
-    String no;
-    String effectiveDate;
-    BigDecimal mid;
+public class Rate {
+    private String no;
+    private String effectiveDate;
+    private BigDecimal mid;
 
     public String getNo() {
         return no;

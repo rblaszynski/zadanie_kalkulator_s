@@ -1,13 +1,12 @@
 package com.robert.calculator.model;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class ExchangeRate {
-    String table;
-    String currency;
-    String code;
-    List<Rates> rates;
+    private String table;
+    private String currency;
+    private String code;
+    private List<Rate> rates;
 
     public String getTable() {
         return table;
@@ -33,11 +32,11 @@ public class ExchangeRate {
         this.code = code;
     }
 
-    public List<Rates> getRates() {
+    public List<Rate> getRates() {
         return rates;
     }
 
-    public void setRates(List<Rates> rates) {
+    public void setRates(List<Rate> rates) {
         this.rates = rates;
     }
 }

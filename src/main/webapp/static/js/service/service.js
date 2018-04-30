@@ -1,10 +1,32 @@
 'use strict';
 
-App.factory('NBPservice', ['$http', '$q', function($http, $q){
+App.factory('Service', ['$http', '$q', function($http, $q){
 
-    return {
-        getRate: function (code, salary) {
-            return $http.get('http://localhost:8080/'+code+'/'+salary)
+    var factory =
+        {
+            getRate : getRate,
+            getCodes : getCodes
+        };
+
+    return factory;
+
+        function getRate(code, salary) {
+            return $http.get('http://localhost:8080/calculate/'+code+'/'+salary)
+                .then(
+                    function (response)
+                    {
+                        if(response.data>0) return ('Miesięczny zarobek netto: '+response.data+' PLN');
+                        else return ('Miesięczna strata: '+(response.data*-1)+' PLN');
+                    },
+                    function (err) {
+                        console.error('Error');
+                        return $q.reject(err);
+                    }
+                );
+        }
+
+        function getCodes() {
+            return $http.get('http://localhost:8080/countries/codes')
                 .then(
                     function (response)
                     {
@@ -16,5 +38,4 @@ App.factory('NBPservice', ['$http', '$q', function($http, $q){
                     }
                 );
         }
-    }
 }]);
